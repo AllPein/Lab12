@@ -9,7 +9,6 @@ namespace Lab12
         public int key;
         public T value;
         public Item<T> next;
-        static Random rnd = new Random();
         public Item(T val)
         {
             value = val;
@@ -17,21 +16,6 @@ namespace Lab12
             next = null;
         }
 
-        internal HTEnumerator<T> HTEnumerator
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        internal HashTable<T> HashTable
-        {
-            get => default;
-            set
-            {
-            }
-        }
 
         public override string ToString()
         {
