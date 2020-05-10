@@ -16,6 +16,23 @@ namespace Lab12
             key = GetHashCode();
             next = null;
         }
+
+        internal HTEnumerator<T> HTEnumerator
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal HashTable<T> HashTable
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public override string ToString()
         {
             return key + " : " + value.ToString();

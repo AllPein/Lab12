@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 namespace Lab12
 {
-    
-    class HTEnumerator<T> : IEnumerator<Item<T>>
+
+    class HTEnumerator<T> : Item<T>, IEnumerator<Item<T>>
     {
         Item<T>[] items;
         int position = -1;
@@ -44,5 +44,5 @@ namespace Lab12
         }
         public void Dispose() { }
     }
-    
+
 }

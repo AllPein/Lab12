@@ -25,6 +25,15 @@ namespace Lab12
             Size = size;
             items = new Item<T>[Size];
         }
+        public HashTable(HashTable<T> hashTable)
+        {
+            Size = hashTable.Size;
+            items = hashTable.items;
+        }
+        public HashTable()
+        {
+            items = new Item<T>[0];
+        }
         public bool Add(T s)
         {
             Item<T> point = new Item<T>(s);
