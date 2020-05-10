@@ -34,24 +34,24 @@ namespace Lab12
         {
             items = new Item<T>[0];
         }
-        public bool Add(T s)
+        public bool Add(T val)
         {
-            Item<T> point = new Item<T>(s);
-            if (s == null) return false;
-            int index = Math.Abs(point.GetHashCode()) % Size;
-            if (items[index] == null) items[index] = point;
+            Item<T> item = new Item<T>(val);
+            if (val == null) return false;
+            int index = Math.Abs(item.GetHashCode()) % Size;
+            if (items[index] == null) items[index] = item;
             else
             {
-                Item<T> cur = items[index];
-                if (string.Compare(cur.ToString(), point.ToString()) == 0)
+                Item<T> current = items[index];
+                if (string.Compare(current.ToString(), item.ToString()) == 0)
                     return false;
-                while (cur.next != null)
+                while (current.next != null)
                 {
-                    if (string.Compare(cur.ToString(), point.ToString()) == 0)
+                    if (string.Compare(current.ToString(), item.ToString()) == 0)
                         return false;
-                    cur = cur.next;
+                    current = current.next;
                 }
-                cur.next = point;
+                current.next = item;
             }
             return true;
         }
@@ -62,11 +62,11 @@ namespace Lab12
             {
                 if (items[i] != null)
                 {
-                    Item<T> p = items[i];
-                    while (p != null)
+                    Item<T> item = items[i];
+                    while (item != null)
                     {
-                        Console.WriteLine(p.ToString());
-                        p = p.next;
+                        Console.WriteLine(item.ToString());
+                        item = item.next;
                     }
                     Console.WriteLine();
                 }
@@ -75,36 +75,37 @@ namespace Lab12
         }
         public bool FindPoint(T val)
         {
-            Item<T> lp = new Item<T>(val);
-            int code = Math.Abs(lp.GetHashCode()) % Size;
+            Item<T> item = new Item<T>(val);
+            int code = Math.Abs(item.GetHashCode()) % Size;
             if (items[code].value.Equals(val)) return true;
-            lp = items[code];
-            while (lp != null)
+            item = items[code];
+
+            while (item != null)
             {
                 if (items[code].value.Equals(val))
                     return true;
-                lp = lp.next;
+                item = item.next;
             }
             return false;
         }
         public T DelPoint(T val)
         {
-            Item<T> lp = new Item<T>(val);
-            int code = Math.Abs(lp.GetHashCode()) % Size;
-            lp = items[code];
+            Item<T> item = new Item<T>(val);
+            int code = Math.Abs(item.GetHashCode()) % Size;
+            item = items[code];
             if (items[code] == null) return default(T);
             if (items[code] != null && (items[code].value.Equals(val)))
                 {
-                lp = items[code];
+                item = items[code];
                 items[code] = items[code].next;
-                return lp.value;
+                return item.value;
             }
-            while (lp.next != null && (items[code].value.Equals(val)))
-                lp = lp.next;
-            if (lp.next != null)
+            while (item.next != null && (items[code].value.Equals(val)))
+                item = item.next;
+            if (item.next != null)
             {
-                val = lp.next.value;
-                lp.next = lp.next.next;
+                val = item.next.value;
+                item.next = item.next.next;
                 return val;
             }
             return default(T);
@@ -121,7 +122,7 @@ namespace Lab12
         {
             return new HTEnumerator<T>(this.items);
         }
-        public static void Clear(HashTable<T> ht)
+        public static void Clear(ref HashTable<T> ht)
         {
             ht = null;
             GC.Collect();
