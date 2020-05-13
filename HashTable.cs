@@ -57,7 +57,11 @@ namespace Lab12
         }
         public void Print()
         {
-            if (items == null) { Console.WriteLine("Таблица пустая!"); return; }
+            if (items == null) 
+            { 
+                Console.WriteLine("Таблица пустая!"); 
+                return; 
+            }
             for (int i = 0; i < Size; i++)
             {
                 if (items[i] != null)
@@ -73,7 +77,7 @@ namespace Lab12
             }
 
         }
-        public bool FindPoint(T val)
+        public bool Search(T val)
         {
             Item<T> item = new Item<T>(val);
             int code = Math.Abs(item.GetHashCode()) % Size;
@@ -88,14 +92,14 @@ namespace Lab12
             }
             return false;
         }
-        public T DelPoint(T val)
+        public T Remove(T val)
         {
             Item<T> item = new Item<T>(val);
             int code = Math.Abs(item.GetHashCode()) % Size;
             item = items[code];
             if (items[code] == null) return default(T);
             if (items[code] != null && (items[code].value.Equals(val)))
-                {
+            {
                 item = items[code];
                 items[code] = items[code].next;
                 return item.value;

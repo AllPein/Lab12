@@ -4,18 +4,18 @@ using System.Text;
 using Laba10;
 namespace Lab12
 {
-    class Point
+    class BTree
     {
         public Person data;
-        public Point left,
+        public BTree left,
                      right;
-        public Point()
+        public BTree()
         {
             data = new Person("Sasha", 10);
             left = null;
             right = null;
         }
-        public Point(Person d)
+        public BTree(Person d)
         {
             data = d;
             left = null;
@@ -25,22 +25,21 @@ namespace Lab12
         {
             return data.ToString() + " ";
         }
-        public static void Run(Point p, int l)
+        public static void Run(BTree p, int l)
         {
             if (p != null)
             {
-                Run(p.left, l + 3);//переход к левому поддереву
-                                        //формирование отступа
+                Run(p.left, l + 3);
                 for (int i = 0; i < l; i++) Console.Write("     ");
-                Console.WriteLine(p.data);//печать узла
-                Run(p.right, l + 3);//переход к правому поддереву
+                Console.WriteLine(p.data);
+                Run(p.right, l + 3);
             }
         }
 
-        public static Point Add(Point root, Person d)
+        public static BTree Add(BTree root, Person d)
         {
-            Point p = root;
-            Point r = null;
+            BTree p = root;
+            BTree r = null;
             bool ok = false;
             while (p != null && !ok)
             {
@@ -52,32 +51,32 @@ namespace Lab12
             if (ok) return p;
 
 
-            Point newPoint = new Point(d);
+            BTree newBTree = new BTree(d);
 
-            if (d.Age < r.data.Age) r.left = newPoint;
-            else r.right = newPoint;
-            return newPoint;
+            if (d.Age < r.data.Age) r.left = newBTree;
+            else r.right = newBTree;
+            return newBTree;
         }
-        public static Point IdealTree(int size, Point p)
+        public static BTree IdealTree(int size, BTree p)
         {
             Random rnd = new Random();
             string[] names = new string[] { "Sasha", "Oleg", "Olya", "Katya", "Kirill", "Lesha", "Artur", "Daniil", "Tanya", "Ivan", "Egor", "Andrey", "Vladimir" };
 
-            Point r;
+            BTree r;
             int nl, nr;
             if (size == 0) { p = null; return p; }
             nl = size / 2;
             nr = size - nl - 1;
-            r = new Point(new Person(names[rnd.Next(0, 12)], rnd.Next(1,100)));
+            r = new BTree(new Person(names[rnd.Next(0, 12)], rnd.Next(1,100)));
             r.left = IdealTree(nl, r.left);
             r.right = IdealTree(nr, r.right);
             return r;
         }
 
-        public static Person FindMin(Point p)
+        public static Person FindMin(BTree p)
         {
             if (p == null)
-                return new Person("asd", 12);
+                return default(Person);
 
             Person right = FindMin(p.right);
             Person left = FindMin(p.left);

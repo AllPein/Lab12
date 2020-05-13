@@ -190,16 +190,16 @@ namespace Lab12
         }
         static void ThirdTask()
         {
-            Point p = new Point();
-            p = Point.IdealTree(7, p);
+            BTree p = new BTree();
+            p = BTree.IdealTree(7, p);
            
             Console.WriteLine("");
-            Point.Run(p, 0);
+            BTree.Run(p, 0);
 
             Console.WriteLine("");
             Console.WriteLine("Поиск элемента с минимальным возрастом");
             Console.WriteLine("");
-            Person minAgedPerson = Point.FindMin(p);
+            Person minAgedPerson = BTree.FindMin(p);
 
             Console.WriteLine(minAgedPerson.ToString());
             Console.WriteLine("");
@@ -222,12 +222,12 @@ namespace Lab12
 
             Console.WriteLine("Поиск в коллекции: \n");
             Person findPerson = new Person("Sasha", 18);
-            if (ht.FindPoint(findPerson)) Console.WriteLine("Объект найден");
+            if (ht.Search(findPerson)) Console.WriteLine("Объект найден");
             else Console.WriteLine("Объект не найден");
 
 
             Console.WriteLine("Удаление элемента из коллекции: \n");
-            ht.DelPoint(new Person("Sasha", 18));
+            ht.Remove(new Person("Sasha", 18));
             ht.Print();
 
             Console.WriteLine("Перебор коллекции");
